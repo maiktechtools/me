@@ -18,5 +18,13 @@ pipeline {
         input(message: 'Aprobar?', submitter: 'imiguel')
       }
     }
+    stage('Release') {
+      steps {
+        emailext(subject: 'Liberar', body: 'Liberar', to: 'isanjuan')
+        input(message: 'Liberar?', submitter: 'isanjuan')
+        sh 'echo "LIBERADO"'
+        emailext(subject: 'Liberacion correcta', body: 'Liberacion aviso', attachLog: true, to: 'imiguel,isanjuan,desarrollo')
+      }
+    }
   }
 }
